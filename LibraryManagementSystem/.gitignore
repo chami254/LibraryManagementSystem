@@ -24,3 +24,26 @@ Thumbs.db
 
 # Temporary files
 *.tmp
+
+# Compiled class file
+*.class
+
+# Eclipse IDE files
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.settings/
+.loadpath
+.recommenders
+
+# Eclipse project files
+.classpath
+.project
+
+# Maven output
+target/
