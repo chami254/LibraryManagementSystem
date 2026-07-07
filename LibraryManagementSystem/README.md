@@ -29,3 +29,10 @@
 4. Configure Tomcat 9
 5. Create MySQL database
 6. Run on server
+
+## Testing feature-admin
+
+After packaging and deploying the application to Tomcat, test the feature-admin flow using whichever context path Tomcat exposes:
+
+- http://localhost:8080/LibraryManagementSystem/
+- http://localhost:8080/LibraryManagementSystem-1.0.0/

@@ -35,28 +35,16 @@
 
     <dependencies>
 
-        <!-- Servlet API -->
+        <!-- Servlet API for Tomcat 10.x -->
         <dependency>
 
-            <groupId>javax.servlet</groupId>
+            <groupId>jakarta.servlet</groupId>
 
-            <artifactId>javax.servlet-api</artifactId>
+            <artifactId>jakarta.servlet-api</artifactId>
 
-            <version>4.0.1</version>
+            <version>6.0.0</version>
 
             <scope>provided</scope>
-
-        </dependency>
-
-        <!-- JSP Standard Tag Library -->
-
-        <dependency>
-
-            <groupId>javax.servlet</groupId>
-
-            <artifactId>jstl</artifactId>
-
-            <version>1.2</version>
 
         </dependency>
 
@@ -77,6 +65,8 @@
     <!-- Build Plugins                                           -->
 
     <build>
+
+        <finalName>LibraryManagementSystem</finalName>
 
         <plugins>
 
@@ -110,6 +100,29 @@
 
                 <version>3.4.0</version>
 
+            </plugin>
+
+            <!-- Also create the versioned WAR used by manual Tomcat deployment. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy-versioned-war</id>
+                        <phase>package</phase>
+                        <configuration>
+                            <target>
+                                <copy file="${project.build.directory}/LibraryManagementSystem.war"
+                                      tofile="${project.build.directory}/LibraryManagementSystem-1.0.0.war"
+                                      overwrite="true" />
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>
