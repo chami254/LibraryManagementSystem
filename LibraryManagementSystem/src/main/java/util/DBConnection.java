@@ -8,42 +8,27 @@ import config.DatabaseConfig;
 
 public class DBConnection {
 
-    private static Connection connection;
-
     private DBConnection() {}
 
-    public static Connection getConnection() {
+    public static Connection getConnection() throws SQLException {
 
         try {
 
-            if (connection == null || connection.isClosed()) {
+            Class.forName(DatabaseConfig.DRIVER);
 
-                Class.forName(DatabaseConfig.DRIVER);
+            Connection connection = DriverManager.getConnection(
+                    DatabaseConfig.URL,
+                    DatabaseConfig.USERNAME,
+                    DatabaseConfig.PASSWORD
+            );
 
-                connection = DriverManager.getConnection(
-                        DatabaseConfig.URL,
-                        DatabaseConfig.USERNAME,
-                        DatabaseConfig.PASSWORD
-                );
-
-                System.out.println("Database Connected Successfully!");
-
-            }
+            System.out.println("Database Connected Successfully!");
+            return connection;
 
         } catch (ClassNotFoundException e) {
 
-            System.out.println("MySQL Driver Not Found!");
-
-            e.printStackTrace();
-
-        } catch (SQLException e) {
-
-            System.out.println("Database Connection Failed!");
-
-            e.printStackTrace();
+            throw new SQLException("MySQL Driver Not Found!", e);
 
         }
-
-        return connection;
     }
 }
